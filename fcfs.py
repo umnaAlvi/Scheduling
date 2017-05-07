@@ -4,8 +4,6 @@
 proc1={}
 A_T=0
 B_T=0
-arrival=[]
-burst=[]
 total=0
 
 n=input("enter number of process: ")
@@ -15,10 +13,8 @@ for i in range(0,n):
       min=A_T
    elif(min>A_T):
        min=A_T
-   arrival.append(A_T)
    B_T=input("Enter Burst time")
-   burst.append(B_T)
-   proc1[i+1]=[arrival[i],burst[i]]
+   proc1[i+1]=[A_T,B_T]
 print "process in fcfs order"
 a_time=proc1.get(1)[0]
 b_time=0
