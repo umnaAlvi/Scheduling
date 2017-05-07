@@ -1,42 +1,42 @@
 #!usr/bin/python
 #sjf
-
 proc1={}
 A_T=0
 B_T=0
-arrival=[]
-burst=[]
 total=0
 k=2
+min1=0
 n=input("enter number of process: ")
 for i in range(0,n):
    A_T=input("Enter Arrival time: ")
    if(i==0):
-      min=A_T
-   elif(min>A_T):
-       min=A_T
-   arrival.append(A_T)
-   B_T=input("Enter Burst time")
-   burst.append(B_T)
-   proc1[i+1]=[arrival[i],burst[i]]
-for i in range(1,n+1):
-  for j in range(1,n+1):
-    if(proc1.get(i)[0]<proc1.get(j)[0]):
-       temp=proc1.get(j)[0]
-       proc1.get(j)[0]=proc1.get(i)[0]
-       proc1.get(i)[0]=temp
-     
-       temp=proc1.get(j)[1]
-       proc1.get(j)[1]=proc1.get(i)[1]
-       proc1.get(i)[1]=temp
+      min1=A_T
+   elif(min1>A_T):
+       min1=A_T
+   B_T=input("Enter Burst time: ")
+   proc1[i+1]=[A_T,B_T]
+a_time=proc1.get(1)[0]
+for index in range(1,n+1):
+   #min=a_time
+   exe=index
+   for j in range(index+1,n+1):
+      if(proc1.get(j)[0]<proc1.get(exe)[0]):
+         exe=j
+   temp=proc1.get(index)[1]
+   proc1.get(index)[1]=proc1.get(exe)[1]
+   proc1.get(exe)[1]=temp
+
+   temp=proc1.get(index)[0]
+   proc1.get(index)[0]=proc1.get(exe)[0]
+   proc1.get(exe)[0]=temp
 b_time=0
+k=2
 #accordting t and w
-print proc1.get(k)[1]
-for j in range(1,n):
+for j in range(1,n+1):
   b_time=proc1.get(j)[1]+b_time
-  min=proc1.get(k)[1]
-  for i in range(j+1,n):  
-       if(b_time>=proc1.get(i)[0] and proc1.get(i)[1]<min):
+  min=k
+  for i in range(j+1,n+1):  
+       if(b_time>=proc1.get(i)[0] and proc1.get(i)[1]<proc1.get(k)[1]):
           temp=proc1.get(k)[0]
           proc1.get(k)[0]=proc1.get(i)[0]
           proc1.get(i)[0]=temp
@@ -45,9 +45,11 @@ for j in range(1,n):
           proc1.get(k)[1]=proc1.get(i)[1]
           proc1.get(i)[1]=temp
   k=k+1
+print "process in sjf order"
 for i in range(1,n+1):
   print proc1.get(i)[0]," ",proc1.get(i)[1]
 a_time=proc1.get(1)[0]
+total=min1
 b_time=0
 tol=total
 tim=total
