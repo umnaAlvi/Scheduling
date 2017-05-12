@@ -57,7 +57,7 @@ while(count!=num):
       if(remain<0):
          total=total+proc.get(index)[1] 
          print "process ",index," ",min1,"-----",total," "
-         cntn=proc.get(index)[2]
+         new_ind=proc.get(index)[2]
          proc1[count+1]=[proc.get(new_ind)[0],proc.get(new_ind)[1],total]
          count=count+1
       min1=total
