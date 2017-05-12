@@ -37,7 +37,7 @@ for j in range(1,num+1):
   for i in range(j+1,num+1):  
        if(b_time>=proc1.get(i)[0] and proc1.get(i)[1]<proc1.get(next1)[1]):
           temp=proc1.get(next1)[0]
-          proc1.get(k)[0]=proc1.get(i)[0]
+          proc1.get(next1)[0]=proc1.get(i)[0]
           proc1.get(i)[0]=temp
      
           temp=proc1.get(next1)[1]
