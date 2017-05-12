@@ -4,18 +4,18 @@ total=0
 num=input("Enter the number of process:  ")
 Qt=input("Enter Quantum time of processes: ")
 for i in range(0,num):
-   arr=input("Enter Arrival time of process: ")
-   bT=input("Enter burst time of proces: ")
+   arrival=input("Enter Arrival time of process: ")
+   burst=input("Enter burst time of proces: ")
    if(i==0):
-       min=arr	
-   elif(min>arr):
-       min=arr	
-   proc[i+1]=[arr,bT,i+1]  
+       min=arrival	
+   elif(min>arrival):
+       min=arrival	
+   proc[i+1]=[arrival,burst,i+1]  
 total=min
 if(total>0):
 	print  "idle time","0----------",total
-a_time=proc.get(1)[0]
-b_time=0
+A_time=proc.get(1)[0]
+B_time=0
 exe=0
 for index in range(1,num+1):
    exe=index
@@ -33,35 +33,35 @@ for index in range(1,num+1):
    temp=proc.get(index)[2]
    proc.get(index)[2]=proc.get(exe)[2]
    proc.get(exe)[2]=temp
-rem=0
+remain=0
 count=0
-i=1
-j=num+1
+index=1
+last=num+1
 wait=[]
 turn=[]
-tim=min
+min1=min
 while(count!=num):
-      rem=(proc.get(i)[1])-Qt
-      if(proc.get(i)[1]>Qt):
-         proc[j]=[proc.get(i)[0],rem,i]
-         j=j+1
-      if(rem>0):
+      remain=(proc.get(index)[1])-Qt
+      if(proc.get(index)[1]>Qt):
+         proc[last]=[proc.get(index)[0],remain,index]
+         last=last+1
+      if(remain>0):
          total=total+Qt
-         print "process ",i," ",tim,"-----",total," "
-      if(rem==0):
-         total=total+proc.get(i)[1]
-         print "process ",i," ",tim,"-----",total," "
-         cntn=proc.get(i)[2]
-         proc1[count+1]=[proc.get(cntn)[0],proc.get(cntn)[1],total]
+         print "process ",index," ",min1,"-----",total," "
+      if(remain==0):
+         total=total+proc.get(index)[1]
+         print "process ",index," ",min1,"-----",total," "
+         new_ind=proc.get(index)[2]
+         proc1[count+1]=[proc.get(new_ind)[0],proc.get(new_ind)[1],total]
          count=count+1
-      if(rem<0):
-         total=total+proc.get(i)[1] 
-         print "process ",i," ",tim,"-----",total," "
-         cntn=proc.get(i)[2]
-         proc1[count+1]=[proc.get(cntn)[0],proc.get(cntn)[1],total]
+      if(remain<0):
+         total=total+proc.get(index)[1] 
+         print "process ",index," ",min1,"-----",total," "
+         cntn=proc.get(index)[2]
+         proc1[count+1]=[proc.get(new_ind)[0],proc.get(new_ind)[1],total]
          count=count+1
-      tim=total
-      i=i+1
+      min1=total
+      index=index+1
 A_t=0
 A_w=0 
 for i in range (1,num+1):
