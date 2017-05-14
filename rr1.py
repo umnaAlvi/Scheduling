@@ -1,23 +1,27 @@
 #!usr/bin/python
 proc={}
-total=0
+proc1={}
 num=input("Enter the number of process:  ")
 Qt=input("Enter Quantum time of processes: ")
-for i in range(0,num):
+def inputfunc():
+ for i in range(0,num):
    arrival=input("Enter Arrival time of process: ")
    burst=input("Enter burst time of proces: ")
    if(i==0):
-       min=arrival	
-   elif(min>arrival):
-       min=arrival	
+       min1=arrival	
+   elif(min1>arrival):
+       min1=arrival	
    proc[i+1]=[arrival,burst,i+1]  
-total=min
+ return (min1)
+catch=inputfunc() 
+total=catch
 if(total>0):
 	print  "idle time","0----------",total
 A_time=proc.get(1)[0]
 B_time=0
 exe=0
-for index in range(1,num+1):
+def sortArrivalTime():
+ for index in range(1,num+1):
    exe=index
    for j in range(index+1,num+1):
       if(proc.get(j)[0]<proc.get(exe)[0]):
@@ -33,14 +37,17 @@ for index in range(1,num+1):
    temp=proc.get(index)[2]
    proc.get(index)[2]=proc.get(exe)[2]
    proc.get(exe)[2]=temp
-remain=0
-count=0
-index=1
-last=num+1
+sortArrivalTime()
 wait=[]
 turn=[]
-min1=min
-while(count!=num):
+def RRALGOFUNC(min2):
+ total=min2
+ remain=0
+ count=0
+ index=1
+ last=num+1
+ min1=min2
+ while(count!=num):
       remain=(proc.get(index)[1])-Qt
       if(proc.get(index)[1]>Qt):
          proc[last]=[proc.get(index)[0],remain,index]
@@ -62,17 +69,17 @@ while(count!=num):
          count=count+1
       min1=total
       index=index+1
-A_t=0
-A_w=0 
-for i in range (1,num+1):
+RRALGOFUNC(catch)
+def waitandTurnFunc():
+ A_t=0
+ A_w=0 
+ for i in range (1,num+1):
    wait.insert(i-1,(proc1.get(i)[2]-proc1.get(i)[0]-proc1.get(i)[1]))
    turn.insert(i-1,(proc1.get(i)[2]-proc1.get(i)[0]))
    A_t=A_t+turn[i-1]
    A_w=A_w+wait[i-1]
+ print "average waiting time: ",A_w/num," average turnaround time: ",A_t/num 
+waitandTurnFunc()
 print "process"," ","Arrival time"," ","burst time"," ","waiting time"," ","turnaround time"
 for i in range(1,num+1):
    print proc.get(i)[2],"\t\t",proc1.get(i)[0],"\t\t",proc1.get(i)[1],"\t\t",wait[i-1],"\t\t",turn[i-1]
-print "average waiting time: ",A_w/num," average turnaround time: ",A_t/num 
- 
-
-   
