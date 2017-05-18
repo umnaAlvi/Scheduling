@@ -9,8 +9,11 @@ exe=0
 A_time=proc.get(1)[0]
 for k,b in proc.items():
    print("process :{0},AT,BT:{1}".format(k,b))
-print "process in priority order"
-for index in range(1,5):
+def printfunc():
+ tol1=0
+ print "process in priority order"
+ for index in range(1,5):
+   
    min=A_time
    exe=index
    for j in range(index+1,5):
@@ -29,11 +32,10 @@ for index in range(1,5):
    proc.get(exe)[0]=temp
    b_time=proc.get(index)[1]
    print proc.get(index)
-   pri=tol
-   tol=tol+b_time;
-   
+   pri=tol1
+   tol1=tol1+b_time;
+ tol=tol1
 A_time=proc.get(1)[0]
-b_time=0
 total=0
 tol=total
 min1=total
@@ -41,9 +43,12 @@ wait_time=0
 turn_time=0
 wait=[]
 turn=[]
-A_w=0
-A_t=0
-for i in range(1,5):
+def waitandturnfunc():
+ tol=total
+ b_time=0
+ A_w=0
+ A_t=0
+ for i in range(1,5):
    min1=tol
    wait_time=min1
    wait.insert(i-1,(min1-(proc.get(i)[0])))
@@ -53,8 +58,10 @@ for i in range(1,5):
    turn.insert(i-1,(tol-proc.get(i)[0]))
    A_w=A_w+wait[i-1]
    A_t=A_t+turn[i-1]
+   print "average waiting time: ",A_w/4," average turnaround time: ",A_t/4 
+waitandturnfunc()
 print "process"," ","arrival time"," ","burst time"," ","priority"," ","waiting time"," ","turnaround time"
 for i in range(1,5):
    print i," \t  ",proc.get(i)[0]," \t\t  ",proc.get(i)[1],"\t\t",proc.get(i)    [2],"\t\t ",wait[i-1],"\t\t ",turn[i-1]
 
-print "average waiting time: ",A_w/4," average turnaround time: ",A_t/4 
+
